@@ -1,0 +1,67 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h4>
+    ООО "Тадеум"
+  </h4>
+  <h4>
+    Сертификаты и декларации к ТТН
+  </h4>
+</div>
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-2">
+        <label for="Series">Серия</label>
+        <input type="text" class="form-control" id="Series" aria-describedby="Series" placeholder="ХХ" [(ngModel)]="Series" (change)="getFileList()">
+      </div>
+      <div class="col-md-2">
+        <label for="Number">Номер ТТН</label>
+        <input type="text" class="form-control" id="Number" aria-describedby="Number" placeholder="ХХХХХХХ" [(ngModel)]="InvoiceNumber" (change)="getFileList()">
+      </div>
+      <div class="col-md-2">
+        <label for="btnFind" class="text-white">_</label>
+        <button type="button" class="form-control btn btn-primary" id="btnFind" (click)="getFileList()">Найти</button>
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+
+    <div class="container-fluid">
+    <div class="row pt-4" style = "height: 87vh;" *ngIf = "isOk()">
+      <div class="col-md-2" id = "leftright">
+        <a [attr.href]="DownloadLink()" type="button" #button class="btn btn-link text-danger font-weight-bold" (click) = "StartDownloading()">Скачать</a>
+        <div class="row" *ngFor="let File of Files">
+          <div class="col-md-12">
+            <button type="button" #button class="btn btn-link" (click)="setCurrentFoto(File)">{{File.Name}}</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10 text-center" id = "leftright">
+        <div *ngIf = "isNotOkFoto()">
+          <br><br><br><br>
+          <h5 class="text-info">{{infoMessage}}</h5>
+        </div>
+        <a [href]="CurrentFoto" [download] = "nameCurrentFoto">
+          <img [src]="CurrentFoto" download = "бла бла бла.jpg" class="img-fluid" *ngIf = "isOkFoto()">    
+        </a>
+      </div>   
+    </div>
+    </div>
+
+    <div class="row pt-4" *ngIf = "isNotOk()">
+      <div class="col-md-12 text-danger text-center font-weight-bold">
+        <h3>{{infoText}}</h3>
+      </div> 
+    </div>
+    
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>

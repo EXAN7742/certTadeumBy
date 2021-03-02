@@ -1,0 +1,5 @@
+.btn{
+    font-weight: normal;
+} .btn:focus{
+    font-weight: bold;
+}
